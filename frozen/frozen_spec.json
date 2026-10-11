@@ -1,0 +1,146 @@
+{
+ "cohort": {
+  "alarm": "gate score >= threshold, primary subset, scorable rows",
+  "alarm_time_t": "T4: first alarm hour of the episode whose (t-24h, t] window has >= 18 of 24 points for USFLUX and TOTUSJH",
+  "code": "cohort.py",
+  "code_sha256": "814c6b8cdd1b13d18c2f72638b60cf6868117b081d19846de0a0bd1fb7b9245a",
+  "delayed": "no M1+ in (t, t+24h], >= 1 M1+ from the HARP's region in (t+24h, t+48h], window free of label-missing days",
+  "episode": "T1: consecutive alarm hours merged across <= 3 missing/unscorable hours; ends at a scored hour below threshold or > 3 missing hours",
+  "exclusions": [
+   "no evaluable hour",
+   "history_incomplete at t",
+   "label-missing (absent rows)"
+  ],
+  "history": "n_C, n_M, n_X in [t-48h, t) (identical to (t-48h, t] here)",
+  "trends": "least-squares slope vs hours over (t-24h, t] divided by the window mean; USFLUX and TOTUSJH; >= 18 points",
+  "true_alarm": "M1+ in (t, t+24h]",
+  "unit": "T2: all eligible episodes; weight 1/(eligible episodes in HARP)"
+ },
+ "data": {
+  "excluded_years": [
+   2020
+  ],
+  "labelled_file": "data/labelled_20100501_20250101.csv",
+  "labelled_sha256": "62a0e4ccffe8b1fc4dacd2a0ba80570bf56018540d57367c16eb37337380ffeb",
+  "labels": "K2 (true irradiance scale), SWPC original event reports",
+  "primary_subset": "noaa_ar_count == 1",
+  "primary_test_years": [
+   2021,
+   2023,
+   2024
+  ],
+  "robustness_subsets": [
+   "noaa_ar_count <= 2",
+   "all HARPs (ANY rule)"
+  ],
+  "sensitivity_test_years": [
+   2021,
+   2022,
+   2023,
+   2024
+  ],
+  "split_file": "frozen/split.csv",
+  "split_sha256": "f3ab4056dd7b123aa8116b5d76650ddd916805139ee262381f9a7ffda728d145",
+  "unscorable_rule": "rows with any gate feature missing get no gate score; excluded from alarms and metrics"
+ },
+ "exploratory": "delayed alarms: descriptive only if < 10 matched pairs",
+ "frozen_on": "2026-09-21",
+ "gate": {
+  "cv": "5-fold grouped by HARP, 3 K2 strata, seed 20260921",
+  "features": [
+   "totusjh",
+   "totpot",
+   "totusjz",
+   "absnjzh",
+   "savncpp",
+   "usflux",
+   "area_acr",
+   "meanpot",
+   "r_value",
+   "shrgt45"
+  ],
+  "fold_models": {
+   "fold0": {
+    "path": "data/stage2/models/fold0.joblib",
+    "sha256": "d283c18bfe242518d0389c33c2e94bfe25405b0bc9ebd3f42030592ec09ee00a"
+   },
+   "fold1": {
+    "path": "data/stage2/models/fold1.joblib",
+    "sha256": "1dbc5a7908903d4cb9d9c03d14e3c51945b2712333a1b2dbcd556779b7769c20"
+   },
+   "fold2": {
+    "path": "data/stage2/models/fold2.joblib",
+    "sha256": "9e6f233705d9490f830b439a5debd215dc856f3879fd51e142b7f7a8df164d7c"
+   },
+   "fold3": {
+    "path": "data/stage2/models/fold3.joblib",
+    "sha256": "7aeae7f67c858889c249089e7f0af54832490e190e158e4b731cfb36ac87970c"
+   },
+   "fold4": {
+    "path": "data/stage2/models/fold4.joblib",
+    "sha256": "49e7c9597746e1398990b13c65a311aa8f16de12780900878cc0b7cd91ac8f48"
+   }
+  },
+  "scaling": "per training fold: subtract median, divide by standard deviation (B&C 2015 sec. 5)",
+  "score": "SVM decision_function",
+  "svm": {
+   "C": 4.0,
+   "class_weight": {
+    "0": 1.0,
+    "1": 2.0
+   },
+   "gamma": 0.075,
+   "kernel": "rbf",
+   "tol": 1e-08
+  },
+  "test_metrics": "TSS, HSS, FAR at hour level and region level; TSS with HARP-bootstrap 95% CI, 1,000 resamples",
+  "test_score": "mean of the 5 fold models' decision values; no refit",
+  "threshold": -0.9924957750431066,
+  "threshold_rule": "max TSS on pooled out-of-fold hourly dev scores (primary subset)",
+  "training_rows": "dev single-region rows at TAI hours {4,10,16,22}"
+ },
+ "matched_pairs": {
+  "caliper": 0.07470488674776919,
+  "caliper_rule": "0.2 x SD of gate score over the dev cohort episodes",
+  "matching": "1:1 greedy nearest on gate score, without replacement, false alarm from a different HARP, seeded order"
+ },
+ "models": {
+  "A": [
+   "score",
+   "n_C",
+   "n_M",
+   "n_X"
+  ],
+  "B": [
+   "score",
+   "n_C",
+   "n_M",
+   "n_X",
+   "rel_slope_usflux",
+   "rel_slope_totusjh"
+  ],
+  "cv": "5-fold grouped by HARP, 2 strata (>= 1 true episode / none), seed 20260921",
+  "estimator": "LogisticRegression(penalty='l2', C=1.0, solver='lbfgs', max_iter=10000), no tuning",
+  "fold_models": {
+   "A_fold0": "81060eb8986ccd2f35a35e7d19d97fabb6fa85a0d8752b078effdabd47f64674",
+   "A_fold1": "c97f6bb11788b29bc5241b0837c6150e0608d44b7d90f1e243b72402c0f227d6",
+   "A_fold2": "25441795d6da20770005cb3b7df6a8d12863adf8a829bc6bf212967f75326f09",
+   "A_fold3": "32e738831f80e3b9ecab2ea66a2e423af185a5ee1d831125867069428510ad8d",
+   "A_fold4": "1c254c5733b14a2e646bef7cfa287603012f6fdd0151f7792d663d265dd056f4",
+   "B_fold0": "7a750fc1651a9315890d5f6a06c1efd247b9cf659735a05e432f982ff71524d1",
+   "B_fold1": "90fcdad17a71540e3246c65b16a4b588adf8ef2513d0b43908c181bde82c5990",
+   "B_fold2": "f938d3322441a0a37d1d4a1d6777cc2605092267779efd4fff78c61ded017ea0",
+   "B_fold3": "2b4e4bc06b4213e80f2ffd9b642e5d246c2c0e614041e5ee7f49ff8a6d7a24f3",
+   "B_fold4": "95d5119ce116c020a2ae318ce2ab609d7a02606aca14a863d70de76da904d6c2"
+  },
+  "primary_metric": "weighted log-loss(A) - log-loss(B) on the primary test years; HARP-bootstrap 95% CI, 10,000 resamples",
+  "sample_weight": "episode weight",
+  "secondary": "weighted AUC for A and B",
+  "standardisation": "StandardScaler fitted on training folds",
+  "test_prediction": "APPROVED by user 2026-09-21: mean of the 5 fold models' predicted probabilities; no refit"
+ },
+ "seeds": {
+  "all": 20260921
+ },
+ "status": "frozen at CHECKPOINT 4; Stage 5 runs once after user approval"
+}

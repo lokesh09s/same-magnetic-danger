@@ -1,0 +1,53 @@
+CANDIDATE #28 CNN1D — STEP 2, DEV EVALUATION, RUN ONCE (EXPLORATORY (dev)); decisions.md fdf044d + 8630b46
+checks: C_CV OOF reproduces the frozen euv_extra C_CV exactly (LL 0.3160449751, tau 0.0689361654); episodes 541 (true 96, false 445), HARPs 179
+check: curve file data/minirocket/curves.csv sha256 eafb4b00c16228ce7995f6d6f0d949d52371ae4de05c139f6995fb9672b94129, identical to a fresh rebuild
+pipeline wall 62.8 s
+
+== E1 PRIMARY (CNN seed 20260921): Δ = LL(C_CV) − LL(C_CV + curve) (+ = curve helps); HARP bootstrap 10000, seed 20260921
+  LL(C_CV) 0.3160, LL(C_CV + curve) 0.3158; Δ +0.0002 [-0.0041, +0.0041]; weighted AUC 0.7888 -> 0.7864
+  stacker coefficients per outer fold (per 1 SD, training-fold StandardScaler):
+ fold   score     n_C     n_M     n_X    logR  log10_CV_box  logit_curve
+    0 +0.7612 -0.0119 +0.0128 +0.0798 +0.1442       +0.7926      -0.2715
+    1 +0.4916 -0.0512 +0.4044 +0.0514 -0.1563       +0.6866      -0.3896
+    2 +0.8928 +0.0732 +0.1375 -0.1328 +0.1628       +0.8928      -0.4217
+    3 +0.7817 -0.2576 +0.2109 -0.0628 -0.0061       +0.4902      -0.0759
+    4 +0.6235 -0.0114 +0.2044 +0.0426 +0.0333       +0.6994      -0.0858
+
+== E2 MATCHED RETENTION: dev OOF tau per model (tau_keep); weighted; paired HARP bootstrap 2000, seed 0
+  target 0.88: C_CV tau 0.068936 true kept 84/96 (0.8803 w), false removed 218/445 (0.4863 w) | C_CV + curve tau 0.068992 true kept 84/96 (0.8876 w), false removed 214/445 (0.4625 w)
+     false removed (C_CV + curve − C_CV): -2.38 points [-5.43, -0.05]
+  target 0.95: C_CV tau 0.060364 true kept 88/96 (0.9544 w), false removed 193/445 (0.4191 w) | C_CV + curve tau 0.058621 true kept 88/96 (0.9544 w), false removed 181/445 (0.3875 w)
+     false removed (C_CV + curve − C_CV): -3.16 points [-7.53, +0.88]
+
+== E3 DESCRIPTIVE
+  curve-score-only OOF weighted AUC 0.6445; CV_box-only OOF weighted AUC (fit_folds on log10_CV_box) 0.7068
+  curve-score twins (T_a = twins(c), T_b = twins(c, by_group=True); ratio_jobs mode 'ratio' on the OOF curve score; CI pairs by true HARP 2000, seed 0)
+twins  pairs  twin_med_true  twin_med_false  ratio_twins            tw_CI  true_higher  false_higher  ties  sign_p  ratio_all           all_CI
+  T_a     81         0.1433          0.1312       1.0921 [1.0449, 1.1809]           56            25     0  0.0008     1.1485 [1.0590, 1.2424]
+  T_b     78         0.1432          0.1326       1.0799 [1.0144, 1.1627]           52            26     0  0.0043     1.1485 [1.0590, 1.2424]
+  Spearman rho(curve score, log10_CV_box) = 0.7612 (p 1.84e-103, n 541)
+  Spearman rho(curve score, n_C) = 0.4724 (p 1.99e-31, n 541)
+  Spearman rho(curve score, logR) = -0.5402 (p 2.63e-42, n 541)
+  Spearman rho(curve score, score) = 0.2920 (p 4.30e-12, n 541)
+
+== E4 STABILITY: E1 with CNN seed in [1, 2, 3, 4, 5] (the seed drives initialisation, batch order, dropout and the 20% split; primary stays 20260921)
+  seed 20260921: LL(C_CV + curve) 0.3158; Δ +0.0002 [-0.0041, +0.0041]; AUC 0.7864
+  seed 1: LL(C_CV + curve) 0.3244; Δ -0.0084 [-0.0180, +0.0005]; AUC 0.7492
+  seed 2: LL(C_CV + curve) 0.3208; Δ -0.0047 [-0.0151, +0.0045]; AUC 0.7738
+  seed 3: LL(C_CV + curve) 0.3124; Δ +0.0036 [-0.0033, +0.0105]; AUC 0.7913
+  seed 4: LL(C_CV + curve) 0.3213; Δ -0.0052 [-0.0127, +0.0014]; AUC 0.7773
+  seed 5: LL(C_CV + curve) 0.3215; Δ -0.0055 [-0.0228, +0.0094]; AUC 0.7586
+
+== E5 TRAINING (descriptive; seed 20260921): weighted BCE at the restored best epoch, eval mode; train = the 80% fitted part, val = the 20% early-stopping part
+ outer_fold  best_epoch  epochs  train_loss  val_loss
+          0          95     115      0.3865    0.3346
+          1          92     112      0.3301    0.4584
+          2          31      51      0.3651    0.4895
+          3         200     200      0.3576    0.3514
+          4         106     126      0.3679    0.4080
+  mean best epoch over all 30 networks (5 outer + 25 inner): 84.47 (min 10, max 200); networks stopped by patience: 26/30
+  networks with best epoch = 200: 2/30 -> epoch cap not binding in more than half of the networks (pre-stated rule)
+
+QUALIFICATION RULE (pre-stated, mechanical): E1 Δ +0.0002 > 0 is True; E2 (88%) -2.38 points > 0 is False -> "NOT ELIGIBLE"
+
+wall total 66.2 s

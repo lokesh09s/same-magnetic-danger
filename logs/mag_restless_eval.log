@@ -1,0 +1,70 @@
+CANDIDATE #26 MR — STEP 2, DEV EVALUATION, RUN ONCE (EXPLORATORY (dev)); decisions.md 46207c7 + b2ca7ac + 5cce108
+checks: analysis set = data/euv_extra/dev_rows.csv (541, same order, same weights); MR defined for all 541; model C OOF reproduces the frozen euv_extra C exactly (LL 0.3222578513, tau 0.0625698316)
+analysis set: 541 episodes (true 96, false 445), 179 HARPs
+
+== E1 TWINS: ratio = median(10^x true) / median(10^x false) (phase_f.ratio_jobs mode 'ratio' on 10^x); pairs built on the 541 set (T_a = twins(c), T_b = twins(c, by_group=True)), kept if both values defined; CI: pairs resampled by true HARP, 2000, seed 0; sign test two-sided, ties excluded
+   T_a pairs 81, T_b pairs 78 (of 96 true episodes)
+    feature twins  pairs  twin_med_true  twin_med_false  ratio_twins            tw_CI  true_higher  false_higher  ties  sign_p  ratio_all           all_CI
+         MR   T_a     81         0.0301          0.0278       1.0814 [0.9193, 1.3109]           42            39     0  0.8243     0.8409 [0.6787, 1.0331]
+         MR   T_b     78         0.0300          0.0315       0.9531 [0.7882, 1.1538]           35            43     0  0.4282     0.8409 [0.6787, 1.0331]
+lcv_TOTUSJH   T_a     81         0.0312          0.0322       0.9664 [0.8367, 1.1360]           41            40     0  1.0000     0.7684 [0.6484, 0.9073]
+lcv_TOTUSJH   T_b     78         0.0311          0.0346       0.8985 [0.7582, 1.0459]           33            45     0  0.2127     0.7684 [0.6484, 0.9073]
+ lcv_TOTPOT   T_a     81         0.0222          0.0213       1.0464 [0.7785, 1.4595]           45            36     0  0.3742     0.8419 [0.6451, 1.1741]
+ lcv_TOTPOT   T_b     78         0.0218          0.0234       0.9302 [0.6701, 1.2532]           35            43     0  0.4282     0.8419 [0.6451, 1.1741]
+lcv_TOTUSJZ   T_a     81         0.0384          0.0390       0.9856 [0.7757, 1.1250]           37            44     0  0.5052     0.8003 [0.6123, 0.9965]
+lcv_TOTUSJZ   T_b     78         0.0370          0.0382       0.9678 [0.7528, 1.1863]           36            42     0  0.5716     0.8003 [0.6123, 0.9965]
+     MR_lin   T_a     81         0.0353          0.0321       1.0998 [0.8840, 1.3065]           42            39     0  0.8243     0.8658 [0.6632, 1.0419]
+     MR_lin   T_b     78         0.0351          0.0348       1.0080 [0.7875, 1.1861]           36            42     0  0.5716     0.8658 [0.6632, 1.0419]
+ lcv_USFLUX   T_a     81         0.0261          0.0252       1.0373 [0.6940, 1.4907]           38            43     0  0.6570     0.7901 [0.6206, 1.1184]
+ lcv_USFLUX   T_b     78         0.0257          0.0305       0.8445 [0.6020, 1.3797]           36            42     0  0.5716     0.7901 [0.6206, 1.1184]
+lcv_R_VALUE   T_a     81         0.0120          0.0169       0.7104 [0.5359, 0.9884]           31            50     0  0.0448     0.4339 [0.3095, 0.6195]
+lcv_R_VALUE   T_b     78         0.0120          0.0135       0.8926 [0.6320, 1.1531]           30            48     0  0.0535     0.4339 [0.3095, 0.6195]
+lcv_MEANSHR   T_a     81         0.0092          0.0107       0.8546 [0.7235, 1.1098]           37            44     0  0.5052     0.7211 [0.6200, 0.9122]
+lcv_MEANSHR   T_b     78         0.0095          0.0110       0.8659 [0.7185, 1.1398]           32            46     0  0.1405     0.7211 [0.6200, 0.9122]
+     MR_12h   T_a     63         0.0160          0.0167       0.9581 [0.7934, 1.2078]           30            33     0  0.8013     0.8635 [0.7064, 1.0896]
+     MR_12h   T_b     59         0.0160          0.0167       0.9612 [0.7712, 1.2338]           29            30     0  1.0000     0.8635 [0.7064, 1.0896]
+      MR_nf   T_a     58         0.0323          0.0278       1.1618 [0.8880, 1.3937]           32            26     0  0.5118     0.8337 [0.6755, 1.0036]
+      MR_nf   T_b     54         0.0327          0.0326       1.0031 [0.7598, 1.2205]           25            29     0  0.6835     0.8337 [0.6755, 1.0036]
+    MR_quad   T_a     81         0.0219          0.0221       0.9882 [0.8420, 1.1470]           39            42     0  0.8243     0.8055 [0.6693, 0.9234]
+    MR_quad   T_b     78         0.0219          0.0218       1.0047 [0.7828, 1.1308]           38            40     0  0.9099     0.8055 [0.6693, 0.9234]
+
+== E2 Δ log-loss = LL(C) − LL(C + x) (+ = x helps); C = ['score', 'n_C', 'n_M', 'n_X', 'logR']; both fitted on the set with x defined (Stage 4 folds, weights 1/n per HARP recomputed on that set, training-fold StandardScaler, stage4 LR); OOF; HARP bootstrap 10000, seed 20260921; AUC weighted
+    feature   n  true  false  HARPs   LL_C  LL_Cx   delta                CI  AUC_C  AUC_Cx
+         MR 541    96    445    179 0.3223 0.3335 -0.0113 [-0.0299, 0.0026] 0.7720  0.7333
+lcv_TOTUSJH 541    96    445    179 0.3223 0.3331 -0.0108 [-0.0266, 0.0011] 0.7720  0.7293
+ lcv_TOTPOT 541    96    445    179 0.3223 0.3304 -0.0081 [-0.0207, 0.0014] 0.7720  0.7303
+lcv_TOTUSJZ 541    96    445    179 0.3223 0.3308 -0.0085 [-0.0262, 0.0045] 0.7720  0.7405
+     MR_lin 541    96    445    179 0.3223 0.3358 -0.0136 [-0.0355, 0.0024] 0.7720  0.7302
+ lcv_USFLUX 541    96    445    179 0.3223 0.3323 -0.0100 [-0.0264, 0.0021] 0.7720  0.7227
+lcv_R_VALUE 538    96    442    177 0.3253 0.3332 -0.0079 [-0.0318, 0.0099] 0.7702  0.7466
+lcv_MEANSHR 541    96    445    179 0.3223 0.3322 -0.0099 [-0.0309, 0.0057] 0.7720  0.7368
+     MR_12h 498    77    421    175 0.3149 0.3225 -0.0077 [-0.0236, 0.0044] 0.7441  0.7174
+      MR_nf 487    76    411    169 0.3122 0.3216 -0.0094 [-0.0235, 0.0006] 0.7586  0.7124
+    MR_quad 541    96    445    179 0.3223 0.3316 -0.0093 [-0.0284, 0.0052] 0.7720  0.7386
+
+== E3 MATCHED RETENTION (primary MR): dev OOF tau per model (tau_keep); weighted; paired HARP bootstrap 2000, seed 0
+  target 0.88: C tau 0.062570 true kept 88/96 (0.8807 w), false removed 154/445 (0.3579 w) | C+MR tau 0.056247 true kept 89/96 (0.8843 w), false removed 93/445 (0.2470 w)
+     false removed (C+MR − C): -11.09 points [-16.78, -5.33]
+  target 0.95: C tau 0.056541 true kept 92/96 (0.9792 w), false removed 54/445 (0.1436 w) | C+MR tau 0.033248 true kept 95/96 (0.9563 w), false removed 13/445 (0.0370 w)
+     false removed (C+MR − C): -10.66 points [-16.85, -4.67]
+
+== E4 OVERLAP (analysis set, pooled, unweighted Spearman)
+  rho(MR, log10_CV_box) = -0.0460 (p 2.86e-01, n 541)
+  rho(MR, n_C) = -0.2271 (p 9.35e-08, n 541)
+  rho(MR, n_M) = -0.3180 (p 3.53e-14, n 541)
+  rho(MR, logR) = 0.1528 (p 3.60e-04, n 541)
+  rho(MR, score) = -0.4074 (p 4.80e-23, n 541)
+  CV_box twins within MR tertiles (cut points -1.562797, -1.372930 from Step 1; twins rebuilt inside each tertile, T_a matching; ratio_jobs mode 'ratio'; CI pairs by true HARP 2000, seed 0); DESCRIPTIVE, no reading. Tertile 0 = all 541 (reference)
+ tertile  episodes  n_true  pairs  twin_med_true  twin_med_false  ratio_twins            tw_CI
+       0       541      96     81         0.2594          0.1319       1.9661 [1.4737, 3.1731]
+       1       181      41     33         0.3590          0.1510       2.3773 [1.3318, 3.2504]
+       2       180      38     29         0.2343          0.1039       2.2559 [1.6493, 4.7354]
+       3       180      17     16         0.2752          0.1480       1.8594 [0.4002, 2.9664]
+
+== E5 UNDEFINED COUNTS BY LABEL (true / false)
+  547 (true 98, false 449): MR 0/0; lcv_TOTUSJH 0/0; lcv_TOTPOT 0/0; lcv_TOTUSJZ 0/0; MR_lin 0/0; lcv_USFLUX 0/0; lcv_R_VALUE 0/3; lcv_MEANSHR 0/0; MR_12h 19/25; MR_nf 20/35; MR_quad 0/0
+  541 (true 96, false 445): MR 0/0; lcv_TOTUSJH 0/0; lcv_TOTPOT 0/0; lcv_TOTUSJZ 0/0; MR_lin 0/0; lcv_USFLUX 0/0; lcv_R_VALUE 0/3; lcv_MEANSHR 0/0; MR_12h 19/24; MR_nf 20/34; MR_quad 0/0
+
+QUALIFICATION RULE (pre-stated, mechanical): E1 T_a ratio 1.0814 > 1 is True; E2 Δ -0.0113 > 0 is False -> "NOT ELIGIBLE"
+
+wall 3.3 s, workers 9

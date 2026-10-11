@@ -1,0 +1,37 @@
+CANDIDATE #29 FBL — STEP 2, DEV EVALUATION, RUN ONCE (EXPLORATORY (dev)); decisions.md b3b0c3a + 83973d1
+checks: L identical to Step 1 (data/fbl/dev_L.csv); C_CV OOF reproduces the frozen euv_extra C_CV exactly (LL 0.3160449751, tau 0.0689361654); episodes 541 (true 96, false 445), HARPs 179
+
+== E1: Δ = LL(C_CV) − LL(model) (+ = helps); HARP bootstrap 10000, seed 20260921; AUC weighted
+  PRIMARY C_CV + L: n 541 (true 96); LL(C_CV) 0.3160, LL(model) 0.3205; Δ -0.0044 [-0.0095, +0.0005]; AUC 0.7888 -> 0.7745
+  s1 C_CV + L + L×log10CV_box (centred on the training fold): n 541 (true 96); LL(C_CV) 0.3160, LL(model) 0.3175; Δ -0.0015 [-0.0116, +0.0088]; AUC 0.7888 -> 0.7763
+  s2 C_CV + S1 (stored, log10 total brightness): n 541 (true 96); LL(C_CV) 0.3160, LL(model) 0.3204; Δ -0.0044 [-0.0162, +0.0040]; AUC 0.7888 -> 0.7710
+  PRIMARY coefficients per fold (per 1 SD, training-fold StandardScaler):
+ fold   score     n_C     n_M     n_X    logR  log10_CV_box       L
+    0 +0.7866 +0.0390 +0.0410 +0.0859 +0.1351       +0.7684 -0.2257
+    1 +0.5613 +0.0026 +0.4544 +0.0750 -0.1890       +0.4824 -0.4091
+    2 +0.8955 +0.1331 +0.1463 -0.0989 +0.1688       +0.7862 -0.1045
+    3 +0.7797 -0.2683 +0.2028 -0.0613 -0.0050       +0.4869 +0.0385
+    4 +0.6559 +0.0328 +0.2490 +0.0698 +0.0067       +0.7712 -0.2533
+
+== E2 MATCHED RETENTION (primary): dev OOF tau per model (tau_keep); weighted; paired HARP bootstrap 2000, seed 0
+  target 0.88: C_CV tau 0.068936 true kept 84/96 (0.8803 w), false removed 218/445 (0.4863 w) | C_CV + L tau 0.063014 true kept 84/96 (0.8803 w), false removed 204/445 (0.4459 w)
+     false removed (C_CV + L − C_CV): -4.03 points [-7.17, -1.18]
+  target 0.95: C_CV tau 0.060364 true kept 88/96 (0.9544 w), false removed 193/445 (0.4191 w) | C_CV + L tau 0.047405 true kept 89/96 (0.9546 w), false removed 136/445 (0.2538 w)
+     false removed (C_CV + L − C_CV): -16.52 points [-22.02, -11.42]
+
+== E3 DESCRIPTIVE
+  twins ratio of 10^L (mean DN/s per pixel): T_a = twins(c), T_b = twins(c, by_group=True); ratio_jobs mode 'ratio'; CI pairs by true HARP 2000, seed 0
+twins  pairs  twin_med_true  twin_med_false  ratio_twins            tw_CI  true_higher  false_higher  ties  sign_p  ratio_all           all_CI
+  T_a     81         3.7514          3.1857       1.1776 [0.9404, 1.3693]           55            26     0  0.0017     1.3508 [1.1546, 1.5812]
+  T_b     78         3.7954          3.4582       1.0975 [0.8939, 1.3283]           50            28     0  0.0169     1.3508 [1.1546, 1.5812]
+  Spearman rho(L, log10_CV_box) = 0.6084 (p 4.31e-56, n 541)
+  Spearman rho(L, score) = 0.4782 (p 2.88e-32, n 541)
+  Spearman rho(L, n_C) = 0.5801 (p 5.62e-50, n 541)
+  Spearman rho(L, n_M) = 0.4673 (p 1.07e-30, n 541)
+  Spearman rho(L, logR) = -0.5546 (p 5.84e-45, n 541)
+  Spearman rho(L, year) = -0.1619 (p 1.56e-04, n 541)
+
+QUALIFICATION RULE (pre-stated, mechanical): E1 Δ -0.0044 > 0 is False; E2 (88%) -4.03 points > 0 is False -> "NOT ELIGIBLE"
+STOPPING RULE (decided by: user, b3b0c3a): "Feature testing on the 94 Å data is closed after candidate #29; no further 94 Å features will be tested on 2010–2026 data."
+
+wall total 3.2 s

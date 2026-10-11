@@ -1,0 +1,6 @@
+# Only for the exploratory candidates scripts/09_cnn1d.py (torch, threadpoolctl) and src/minirocket.py (sktime,
+# threadpoolctl). scripts/09_fbl.py runs with requirements.txt. Not needed for any confirmatory result.
+-r requirements.txt
+torch==2.14.0
+sktime==1.2.0
+threadpoolctl==3.7.0

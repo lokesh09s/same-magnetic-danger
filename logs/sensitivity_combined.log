@@ -1,0 +1,69 @@
+SENSITIVITY CHECK ONLY — post-hoc, on already-analysed data (92027fa). Not a test; sets never pooled.
+checks: stored V0 and V1 reproduced from the series files with the frame-subset code path (euv_dctrl.cv; |diff| < 1e-9): S1 378/378 (max |diff| V0 2.2e-16, V1 9.7e-17; stored V1 undefined (< 3 frames) 0, reproduced undefined too); S2 155/155 (max |diff| V0 9.7e-17, V1 9.7e-17; stored V1 undefined (< 3 frames) 0, reproduced undefined too); S3 152/152 (max |diff| V0 1.1e-16, V1 1.1e-16; stored V1 undefined (< 3 frames) 0, reproduced undefined too)
+       T_a = stored TEST 1 pairs (S1; regenerated pairs identical) / pairs regenerated with the 5abc40a code (S2, S3); T_a x V0 reproduces the committed ratios for S1-S3; S1 T_b x V0 reproduces TEST 1 s1 (47 pairs, 2.817 [1.017, 6.823])
+V2 fill = remaining frames / 120 expected 12-min slots in (t-24h, t]; V1 defined if stored sens_fill >= 0.80
+
+====================================================================================================
+S1 2025-26 confirmation <=2-region: 378 episodes (true 56, false 322, HARPs 101); valid frames 44240, of which inside V1 flare windows 1441
+  defined episodes: V0 378, V1 373, V2 3 s 19, V2 2.5 s 6, V2 4 s 79
+  V2 3 s frames removed per episode: true median 61.0, mean 58.14; false median 54.5, mean 53.67; flagged frames 20537; of V2-flagged frames inside V1 flare windows 1047/20537 = 0.0510; of V1 flare frames flagged by V2 1047/1441 = 0.7266; fill >= 0.80 in 19; median fill 0.5167; s = 0 in some round in 138 episodes; still flagging in round 5 (cap) in 335
+  V2 2.5 s frames removed per episode: true median 65.5, mean 63.61; false median 64.0, mean 60.29; flagged frames 22974; of V2-flagged frames inside V1 flare windows 1087/22974 = 0.0473; of V1 flare frames flagged by V2 1087/1441 = 0.7543; fill >= 0.80 in 6; median fill 0.4375; s = 0 in some round in 155 episodes; still flagging in round 5 (cap) in 362
+  V2 4 s frames removed per episode: true median 45.5, mean 49.21; false median 39.0, mean 43.36; flagged frames 16719; of V2-flagged frames inside V1 flare windows 984/16719 = 0.0589; of V1 flare frames flagged by V2 984/1441 = 0.6829; fill >= 0.80 in 79; median fill 0.6250; s = 0 in some round in 99 episodes; still flagging in round 5 (cap) in 288
+  round-1 residuals exactly 0 (median of 5 = the frame's own value), per-episode fraction: median 0.3697, IQR [0.3277, 0.4200] (descriptive)
+
+  twins ratio = median(true) / median(false) over pairs with both members defined; 95% CI pairs resampled by true HARP, 2,000, seed 0; sign test two-sided (true higher vs lower; ties excluded)
+twins                            label  pairs_all  pairs  dropped  med_true  med_false  ratio  CI_lo  CI_hi  true_higher  ties  sign_p  undef_resamples                        reading
+  T_a                V0 stored primary         50     50        0    0.2218     0.0680 3.2624 1.2956 9.4887           39     0  0.0001                0    direction holds, CI above 1
+  T_a          V1 flare frames removed         50     49        1    0.1765     0.0604 2.9247 1.1771 8.2515           37     0  0.0005                0    direction holds, CI above 1
+  T_a                V2 image-only 3 s         50      0       50       NaN        NaN    NaN    NaN    NaN            0     0     NaN                0            undefined (0 pairs)
+  T_a V2 image-only 2.5 s (robustness)         50      0       50       NaN        NaN    NaN    NaN    NaN            0     0     NaN                0            undefined (0 pairs)
+  T_a   V2 image-only 4 s (robustness)         50      4       46    0.0453     0.0228 1.9851 0.8061 6.8436            2     0  1.0000                0 direction holds, CI includes 1
+  T_b                V0 stored primary         47     47        0    0.2245     0.0797 2.8174 1.0169 6.8227           35     0  0.0011                0    direction holds, CI above 1
+  T_b          V1 flare frames removed         47     47        0    0.1801     0.0659 2.7309 1.1042 6.1989           34     0  0.0031                0    direction holds, CI above 1
+  T_b                V2 image-only 3 s         47      0       47       NaN        NaN    NaN    NaN    NaN            0     0     NaN                0            undefined (0 pairs)
+  T_b V2 image-only 2.5 s (robustness)         47      0       47       NaN        NaN    NaN    NaN    NaN            0     0     NaN                0            undefined (0 pairs)
+  T_b   V2 image-only 4 s (robustness)         47      2       45    0.1097     0.0401 2.7323 0.6978 6.8436            1     0  1.0000                0 direction holds, CI includes 1
+
+====================================================================================================
+S2 EUV-unseen PRIMARY 2021/23/24: 155 episodes (true 32, false 123, HARPs 40); valid frames 18089, of which inside V1 flare windows 1050
+  defined episodes: V0 155, V1 146, V2 3 s 7, V2 2.5 s 1, V2 4 s 33
+  V2 3 s frames removed per episode: true median 52.0, mean 52.09; false median 52.0, mean 50.35; flagged frames 7860; of V2-flagged frames inside V1 flare windows 629/7860 = 0.0800; of V1 flare frames flagged by V2 629/1050 = 0.5990; fill >= 0.80 in 7; median fill 0.5333; s = 0 in some round in 30 episodes; still flagging in round 5 (cap) in 133
+  V2 2.5 s frames removed per episode: true median 63.0, mean 59.28; false median 62.0, mean 58.45; flagged frames 9086; of V2-flagged frames inside V1 flare windows 669/9086 = 0.0736; of V1 flare frames flagged by V2 669/1050 = 0.6371; fill >= 0.80 in 1; median fill 0.4583; s = 0 in some round in 44 episodes; still flagging in round 5 (cap) in 152
+  V2 4 s frames removed per episode: true median 38.0, mean 43.38; false median 34.0, mean 39.27; flagged frames 6218; of V2-flagged frames inside V1 flare windows 538/6218 = 0.0865; of V1 flare frames flagged by V2 538/1050 = 0.5124; fill >= 0.80 in 33; median fill 0.6750; s = 0 in some round in 27 episodes; still flagging in round 5 (cap) in 111
+  round-1 residuals exactly 0 (median of 5 = the frame's own value), per-episode fraction: median 0.3613, IQR [0.3273, 0.4009] (descriptive)
+
+  twins ratio = median(true) / median(false) over pairs with both members defined; 95% CI pairs resampled by true HARP, 2,000, seed 0; sign test two-sided (true higher vs lower; ties excluded)
+twins                            label  pairs_all  pairs  dropped  med_true  med_false  ratio  CI_lo  CI_hi  true_higher  ties  sign_p  undef_resamples                        reading
+  T_a                V0 stored primary         23     23        0    0.1563     0.0959 1.6295 0.7907 3.8386           13     0  0.6776                0 direction holds, CI includes 1
+  T_a          V1 flare frames removed         23     21        2    0.1594     0.0786 2.0280 0.8206 4.2110           13     0  0.3833                0 direction holds, CI includes 1
+  T_a                V2 image-only 3 s         23      0       23       NaN        NaN    NaN    NaN    NaN            0     0     NaN                0            undefined (0 pairs)
+  T_a V2 image-only 2.5 s (robustness)         23      0       23       NaN        NaN    NaN    NaN    NaN            0     0     NaN                0            undefined (0 pairs)
+  T_a   V2 image-only 4 s (robustness)         23      0       23       NaN        NaN    NaN    NaN    NaN            0     0     NaN                0            undefined (0 pairs)
+  T_b                V0 stored primary         22     22        0    0.1399     0.1047 1.3356 0.6674 2.1473           15     0  0.1338                0 direction holds, CI includes 1
+  T_b          V1 flare frames removed         22     19        3    0.1594     0.1188 1.3423 0.6685 2.5072           13     0  0.1671                0 direction holds, CI includes 1
+  T_b                V2 image-only 3 s         22      0       22       NaN        NaN    NaN    NaN    NaN            0     0     NaN                0            undefined (0 pairs)
+  T_b V2 image-only 2.5 s (robustness)         22      0       22       NaN        NaN    NaN    NaN    NaN            0     0     NaN                0            undefined (0 pairs)
+  T_b   V2 image-only 4 s (robustness)         22      0       22       NaN        NaN    NaN    NaN    NaN            0     0     NaN                0            undefined (0 pairs)
+
+====================================================================================================
+S3 2022 sensitivity: 152 episodes (true 28, false 124, HARPs 44); valid frames 17826, of which inside V1 flare windows 750
+  defined episodes: V0 152, V1 149, V2 3 s 4, V2 2.5 s 1, V2 4 s 22
+  V2 3 s frames removed per episode: true median 63.5, mean 61.50; false median 59.5, mean 55.90; flagged frames 8653; of V2-flagged frames inside V1 flare windows 520/8653 = 0.0601; of V1 flare frames flagged by V2 520/750 = 0.6933; fill >= 0.80 in 4; median fill 0.4750; s = 0 in some round in 57 episodes; still flagging in round 5 (cap) in 136
+  V2 2.5 s frames removed per episode: true median 70.0, mean 67.64; false median 67.0, mean 62.01; flagged frames 9583; of V2-flagged frames inside V1 flare windows 548/9583 = 0.0572; of V1 flare frames flagged by V2 548/750 = 0.7307; fill >= 0.80 in 1; median fill 0.4167; s = 0 in some round in 67 episodes; still flagging in round 5 (cap) in 144
+  V2 4 s frames removed per episode: true median 48.5, mean 52.46; false median 40.0, mean 46.81; flagged frames 7273; of V2-flagged frames inside V1 flare windows 489/7273 = 0.0672; of V1 flare frames flagged by V2 489/750 = 0.6520; fill >= 0.80 in 22; median fill 0.6125; s = 0 in some round in 47 episodes; still flagging in round 5 (cap) in 121
+  round-1 residuals exactly 0 (median of 5 = the frame's own value), per-episode fraction: median 0.3697, IQR [0.3305, 0.4118] (descriptive)
+
+  twins ratio = median(true) / median(false) over pairs with both members defined; 95% CI pairs resampled by true HARP, 2,000, seed 0; sign test two-sided (true higher vs lower; ties excluded)
+twins                            label  pairs_all  pairs  dropped  med_true  med_false  ratio  CI_lo  CI_hi  true_higher  ties  sign_p  undef_resamples                        reading
+  T_a                V0 stored primary         25     25        0    0.2641     0.0816 3.2350 1.2554 4.5452           18     0  0.0433                0    direction holds, CI above 1
+  T_a          V1 flare frames removed         25     23        2    0.2149     0.0816 2.6323 0.9065 3.8331           15     0  0.2100                0 direction holds, CI includes 1
+  T_a                V2 image-only 3 s         25      0       25       NaN        NaN    NaN    NaN    NaN            0     0     NaN                0            undefined (0 pairs)
+  T_a V2 image-only 2.5 s (robustness)         25      0       25       NaN        NaN    NaN    NaN    NaN            0     0     NaN                0            undefined (0 pairs)
+  T_a   V2 image-only 4 s (robustness)         25      0       25       NaN        NaN    NaN    NaN    NaN            0     0     NaN                0            undefined (0 pairs)
+  T_b                V0 stored primary         24     24        0    0.2695     0.1033 2.6106 1.0820 3.8852           15     0  0.3075                0    direction holds, CI above 1
+  T_b          V1 flare frames removed         24     22        2    0.2132     0.0766 2.7844 0.8929 5.4379           15     0  0.1338                0 direction holds, CI includes 1
+  T_b                V2 image-only 3 s         24      0       24       NaN        NaN    NaN    NaN    NaN            0     0     NaN                0            undefined (0 pairs)
+  T_b V2 image-only 2.5 s (robustness)         24      0       24       NaN        NaN    NaN    NaN    NaN            0     0     NaN                0            undefined (0 pairs)
+  T_b   V2 image-only 4 s (robustness)         24      0       24       NaN        NaN    NaN    NaN    NaN            0     0     NaN                0            undefined (0 pairs)
+
+figure: figures/sensitivity_combined.png; wall 11.7 s, workers 9

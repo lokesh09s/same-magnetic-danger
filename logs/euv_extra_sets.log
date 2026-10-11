@@ -1,0 +1,10 @@
+excluded-ID sources: {'harps_from_dirs': 396, 'regions_from_dirs': 418, 'regions_added_from_labelled_rows_of_excluded_HARPs': 16}; excluded HARPs 396, excluded NOAA regions 434
+
+set primary: candidate eligible episodes 476; exclusions by rule: {'in cohort_test_primary.csv': 313, 'not eligible (cohort): no evaluable hour (trend window < 18 points at every alarm hour)': 87, 'NOAA region in EUV directories': 5}
+  INCLUDED: 158 episodes, 40 HARPs; by year {2021: {'ep': 8, 'HARPs': 2}, 2023: {'ep': 94, 'HARPs': 23}, 2024: {'ep': 56, 'HARPs': 15}}; single-region 0, two-region 158
+
+set s2022: candidate eligible episodes 152; exclusions by rule: {'not eligible (cohort): no evaluable hour (trend window < 18 points at every alarm hour)': 30}
+  INCLUDED: 152 episodes, 44 HARPs; by year {2022: {'ep': 152, 'HARPs': 44}}; single-region 101, two-region 51
+
+SIZE RULE (PRIMARY >= 100 episodes and >= 30 HARPs): 158 episodes, 40 HARPs -> PASS
+manifest sha256 1766206f1b7d016980404e563a53320002bb5a7bb05757862bd259affcc67d41; excluded_ids sha256 7632a6f8c36695c6cd511c186df77728b6769f97a58ab2f36fa34079bf47c015

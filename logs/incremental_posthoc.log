@@ -1,0 +1,24 @@
+INCREMENTAL TABLE — POST-HOC (decided by: user, decisions.md 2026-10-05). Frozen euv_extra A, C, C_CV (22 hashed files verified); mean of 5 fold models; no refitting; no new features.
+weights 1/n per HARP; delayed = false; PR-AUC = weighted average precision; Brier = weighted mean (p - y)^2; HARP bootstrap 2,000 resamples, seed 0 (phase_f.choices), 95% percentile CI; differences paired on the same resamples.
+
+set 2025-26: n 378 (true 56, false 322), HARPs 101
+REPRODUCED 2025-26 A: logloss 0.3933 AUC 0.7631; logged logloss 0.3933 AUC 0.7631 (euv_confirm_filter_retest.log:7); identical True
+REPRODUCED 2025-26 C: logloss 0.3774 AUC 0.7693; logged logloss 0.3774 AUC 0.7693 (euv_confirm_filter_retest.log:9); identical True
+REPRODUCED 2025-26 C_CV: logloss 0.3672 AUC 0.7977; logged logloss 0.3672 AUC 0.7977 (euv_confirm_filter_retest.log:10); identical True
+POST-HOC 2025-26 A: PRAUC 0.4510 [0.2485, 0.6579] Brier 0.1192 [0.0768, 0.1667] resamples_used 2000
+POST-HOC 2025-26 C: PRAUC 0.4764 [0.2690, 0.6767] Brier 0.1152 [0.0741, 0.1605] resamples_used 2000
+POST-HOC 2025-26 C_CV: PRAUC 0.5068 [0.2855, 0.7152] Brier 0.1127 [0.0719, 0.1568] resamples_used 2000
+POST-HOC 2025-26 C-A: dPRAUC 0.0254 [-0.0243, 0.0871] dBrier -0.0039 [-0.0071, -0.0009] resamples_used 2000
+POST-HOC 2025-26 C_CV-C: dPRAUC 0.0304 [-0.0457, 0.1095] dBrier -0.0026 [-0.0106, 0.0049] resamples_used 2000
+
+set test: n 306 (true 44, false 262), HARPs 98
+NOT PREVIOUSLY LOGGED test A: logloss 0.3707 AUC 0.8002 (POST-HOC)
+REPRODUCED test C: logloss 0.3582 AUC 0.8098; logged logloss 0.3582 AUC 0.8098 (docs/posthoc_2026-09-28.md:475); identical True
+NOT PREVIOUSLY LOGGED test C_CV: logloss 0.3740 AUC 0.7792 (POST-HOC)
+POST-HOC test A: PRAUC 0.4026 [0.2490, 0.6076] Brier 0.1119 [0.0770, 0.1498] resamples_used 2000
+POST-HOC test C: PRAUC 0.4228 [0.2612, 0.6344] Brier 0.1082 [0.0747, 0.1454] resamples_used 2000
+POST-HOC test C_CV: PRAUC 0.3812 [0.2376, 0.5763] Brier 0.1139 [0.0778, 0.1525] resamples_used 2000
+POST-HOC test C-A: dPRAUC 0.0202 [-0.0229, 0.0639] dBrier -0.0038 [-0.0066, -0.0012] resamples_used 2000
+POST-HOC test C_CV-C: dPRAUC -0.0416 [-0.1043, 0.0150] dBrier 0.0057 [0.0001, 0.0116] resamples_used 2000
+
+All logged values reproduced: True. Every PR-AUC / Brier number above is POST-HOC.

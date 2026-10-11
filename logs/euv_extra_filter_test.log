@@ -1,0 +1,33 @@
+PRE-REGISTERED FILTER TEST (338c0aa) — EUV-unseen follow-up validation, not an untouched test. RUN ONCE.
+integrity: 22 model/threshold/dev-row files match their recorded SHA-256; frozen tau: A 0.067970, A_CV 0.074657, C 0.062570, C_CV 0.068936
+
+=== PRIMARY 2021/2023/2024: INCLUDED 158; evaluable (fill >= 80%, CV_box > 0) 155 (true 32, false 123, HARPs 40); label-blind exclusions 3
+composition (year, regions at t -> episodes): 2021/2: 8, 2023/2: 94, 2024/2: 53
+per model at its frozen tau (weighted fractions; 'true alarm episodes kept'):
+model    tau true_kept  true_kept_w  false_kept false_removed  false_removed_w    AUC  logloss
+    A 0.0680     32/32       1.0000         123         0/123           0.0000 0.8006   0.3954
+ A_CV 0.0747     26/32       0.8383          53        70/123           0.6020 0.8075   0.3905
+    C 0.0626     28/32       0.8978         101        22/123           0.1701 0.7752   0.3922
+ C_CV 0.0689     27/32       0.8717          62        61/123           0.5232 0.8075   0.3912
+D_false = weighted % false alarms removed (model with CV_box minus without); D_true = weighted % true alarm episodes kept (same); percentage points; paired HARP bootstrap 2,000, seed 0; delta log-loss = base - CV model (+ = CV helps), HARP bootstrap 10,000, seed 20260921
+comparison  D_false_pts  D_false_lo  D_false_hi  D_true_pts  D_true_lo  D_true_hi  resamples_used  dlogloss  dlogloss_lo  dlogloss_hi  AUC_base  AUC_cv
+ A vs A_CV      60.2040     46.9239     72.7661    -16.1659   -37.5833    -1.9758            2000    0.0050      -0.0181       0.0256    0.8006  0.8075
+ C vs C_CV      35.3170     17.1080     51.8543     -2.6027   -13.3295     3.4909            2000    0.0011      -0.0240       0.0224    0.7752  0.8075
+CV_box twins ratio (step 6 twins code; median true / median false; pairs by true HARP, 2,000, seed 0): 23 pairs of 32 true; twins 1.6295 [0.7907, 3.8386] (medians 0.1563 / 0.0959); all episodes 1.7062 [0.8775, 2.8371]
+
+=== SENSITIVITY 2022 (reported separately; never pooled): INCLUDED 152; evaluable (fill >= 80%, CV_box > 0) 152 (true 28, false 124, HARPs 44); label-blind exclusions 0
+composition (year, regions at t -> episodes): 2022/1: 101, 2022/2: 51
+per model at its frozen tau (weighted fractions; 'true alarm episodes kept'):
+model    tau true_kept  true_kept_w  false_kept false_removed  false_removed_w    AUC  logloss
+    A 0.0680     28/28       1.0000         124         0/124           0.0000 0.7397   0.4177
+ A_CV 0.0747     22/28       0.8567          56        68/124           0.6068 0.8222   0.3749
+    C 0.0626     26/28       0.9435         106        18/124           0.2444 0.7484   0.4028
+ C_CV 0.0689     22/28       0.8567          58        66/124           0.5536 0.8217   0.3758
+D_false = weighted % false alarms removed (model with CV_box minus without); D_true = weighted % true alarm episodes kept (same); percentage points; paired HARP bootstrap 2,000, seed 0; delta log-loss = base - CV model (+ = CV helps), HARP bootstrap 10,000, seed 20260921
+comparison  D_false_pts  D_false_lo  D_false_hi  D_true_pts  D_true_lo  D_true_hi  resamples_used  dlogloss  dlogloss_lo  dlogloss_hi  AUC_base  AUC_cv
+ A vs A_CV      60.6821     49.0151     72.5691    -14.3288   -32.5160    -3.4234            2000    0.0427       0.0010       0.0945    0.7397  0.8222
+ C vs C_CV      30.9199     15.3562     46.1796     -8.6794   -27.0339     1.8870            2000    0.0270      -0.0040       0.0591    0.7484  0.8217
+CV_box twins ratio (step 6 twins code; median true / median false; pairs by true HARP, 2,000, seed 0): 25 pairs of 28 true; twins 3.2350 [1.2554, 4.5452] (medians 0.2641 / 0.0816); all episodes 2.7656 [1.0186, 6.2911]
+
+PRE-STATED READING (mechanical; PRIMARY, A vs A_CV): D_false +60.20 pts [+46.92, +72.77], D_true -16.17 pts [-37.58, -1.98] -> "REMOVES FALSE ALARMS BUT LOSES TOO MANY TRUE ALARMS (point estimate)"
+wall 1.1 s, workers 9

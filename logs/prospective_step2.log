@@ -1,0 +1,19 @@
+PROSPECTIVE PRE-REGISTRATION — STEP 2: DEV EXPLORATION (EXPLORATORY; dev 2010-2019; internal 5-fold CV). 2f62f88; BF = option (a) eb3e7d5; implementation d2ed360
+checks: LL(C) on dev 547 = 0.3356 (Step B 0.3356); CV_box twins ratio and CI reproduce data/phase_f/F2_ratios.csv; on the CV_box set, A / A + log10 CV_box / C / C + log10 CV_box reproduce data/euv_extra/thresholds.json dev log-loss exactly
+
+TWINS RATIO on the step 6 gate-score pairs (data/euv_full/step6/twins_PRIMARY.csv, 81 pairs; both values defined): median true / median false; CI pairs resampled by true HARP, 2,000, seed 0
+measure  pairs  twin_med_true  twin_med_false  ratio_twins  tw_CI_lo  tw_CI_hi
+  BF(a)     81         0.4729          0.3900       1.2125    1.1048    1.3194
+    CV6     69         0.1254          0.0590       2.1261    1.2479    3.3090
+ CV_box     81         0.2594          0.1319       1.9661    1.4737    3.1731
+
+DELTA LOG-LOSS = LL(base) - LL(base + log10 x), + = x helps; Step 6 settings (Stage 4 folds, 1/n per HARP within the set, training-fold StandardScaler, L2 logistic C = 1); C = A + log(1+R) (Step B); HARP bootstrap 10,000, seed 20260921; weighted AUC
+measure             comparison   n  true  false  HARPs  LL_base  LL_plus  delta   CI_lo  CI_hi  AUC_base  AUC_plus
+  BF(a)  A vs A + log10(BF(a)) 541    96    445    179   0.3206   0.3166 0.0040 -0.0072 0.0158    0.7422    0.7925
+  BF(a)  C vs C + log10(BF(a)) 541    96    445    179   0.3223   0.3195 0.0027 -0.0082 0.0141    0.7720    0.7863
+    CV6    A vs A + log10(CV6) 522    84    438    178   0.3184   0.3146 0.0038 -0.0071 0.0151    0.7184    0.7682
+    CV6    C vs C + log10(CV6) 522    84    438    178   0.3204   0.3132 0.0072 -0.0054 0.0219    0.7333    0.7591
+ CV_box A vs A + log10(CV_box) 541    96    445    179   0.3206   0.3132 0.0074 -0.0060 0.0212    0.7422    0.7972
+ CV_box C vs C + log10(CV_box) 541    96    445    179   0.3223   0.3160 0.0062 -0.0058 0.0184    0.7720    0.7888
+
+wall 1.8 s, workers 9

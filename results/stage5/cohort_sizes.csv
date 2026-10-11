@@ -1,0 +1,7 @@
+period,subset,episodes_T1,alarm_HARPs,excluded_episodes,excl_reasons,eligible_episodes,true,false,delayed,regions,regions_with_true,weighted_true
+"primary (2021, 2023, 2024)",single,367,105,54,{'no evaluable hour (trend window < 18 points at every alarm hour)': 54},313,45,268,26,98,28,14.463690476190473
+"primary (2021, 2023, 2024)",<=2,563,152,87,{'no evaluable hour (trend window < 18 points at every alarm hour)': 87},476,81,395,53,139,43,22.464989177489176
+"primary (2021, 2023, 2024)",all,971,226,126,{'no evaluable hour (trend window < 18 points at every alarm hour)': 126},845,180,665,92,212,86,45.88749722499722
+"sensitivity (2021-2024, 2022 included)",single,486,139,72,{'no evaluable hour (trend window < 18 points at every alarm hour)': 72},414,62,352,36,128,37,18.5129329004329
+"sensitivity (2021-2024, 2022 included)",<=2,745,199,117,{'no evaluable hour (trend window < 18 points at every alarm hour)': 117},628,109,519,68,182,56,28.857088744588744
+"sensitivity (2021-2024, 2022 included)",all,1197,286,162,{'no evaluable hour (trend window < 18 points at every alarm hour)': 162},1035,215,820,113,267,102,54.2795967920968

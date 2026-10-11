@@ -1,0 +1,14 @@
+{
+ "reading": "no detectable improvement",
+ "frame_counts": {
+  "exposure-rule frames": 661,
+  "of which QUALITY != 0": 544,
+  "of which QUALITY == 0": 117,
+  "inside P2 flare interval, any QUALITY": 86,
+  "inside P2 flare interval, QUALITY == 0": 68,
+  "frames total": 65253,
+  "frames in P2 flare intervals (any QUALITY)": 2180
+ },
+ "s3_valid": 332,
+ "s3_true": 31
+}

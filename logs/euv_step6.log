@@ -1,0 +1,50 @@
+check: stored primary/sens dCV and fill reproduced from series for 546 episodes (|diff| < 1e-9)
+check: Stage 4 model A reproduced on 547 episodes with the stored fold column (max |diff| 1.1e-16)
+check: twins code reproduces the 83 Stage 4 score-matched pairs
+fill >= 80% but dCV undefined (excluded): ['4839_20141123T2259']
+
+(b, c) E94 vs A -- dev 2010-2019, internal 5-fold CV (NOT a held-out test); delta = LL(A) - LL(E94), + = EUV helps; HARP bootstrap 10000, seed 20260921
+                   set  episodes  true  false  HARPs  weighted_true  weight_sum  logloss_A  logloss_E94  delta_A_minus_E94   CI_lo  CI_hi  AUC_A  AUC_E94
+               PRIMARY       540    96    444    178        22.8800    178.0000     0.3220       0.3262            -0.0043 -0.0092 0.0003 0.7430   0.7196
+     S1_flare_excluded       527    89    438    178        23.2400    178.0000     0.3375       0.3421            -0.0046 -0.0102 0.0004 0.7490   0.7203
+S2_primary_no_overhang       514    90    424    169        22.0600    169.0000     0.3220       0.3269            -0.0049 -0.0108 0.0002 0.7262   0.6925
+      S3_flare_plus_2h       332    31    301    135        12.7800    135.0000     0.3705       0.3747            -0.0042 -0.0199 0.0094 0.4173   0.4873
+
+(d) magnetic twins (gate score, caliper 0.0747, Stage 4 procedure); paired dCV difference true - false; CIs: HARP bootstrap clustered by true HARP, 10000
+set                 PRIMARY  S1_flare_excluded
+true_episodes            96                 89
+pairs                    81                 79
+unmatched                15                 10
+true_HARPs               34                 34
+false_delayed             9                  8
+max_abs_score_diff   0.0623             0.0733
+mean                 0.0776             0.0767
+mean_CI_lo          -0.0463            -0.0331
+mean_CI_hi           0.2159             0.2081
+median               0.0321             0.0564
+median_CI_lo        -0.0346             0.0098
+median_CI_hi         0.0999             0.0995
+frac_true_higher     0.6049             0.6709
+wilcoxon_p           0.0979             0.0228
+
+(e) DESCRIPTIVE dCV by group (unweighted episodes; no test)
+              set       group   n  median     Q1     Q3
+          PRIMARY        true  96  0.1007 0.0415 0.2142
+          PRIMARY     delayed  46  0.1308 0.0437 0.1688
+          PRIMARY other false 398  0.0678 0.0203 0.1768
+S1_flare_excluded        true  89  0.0857 0.0404 0.1737
+S1_flare_excluded     delayed  44  0.1043 0.0437 0.1721
+S1_flare_excluded other false 394  0.0561 0.0144 0.1396
+
+(c) S3 valid at 80%: 332 of 547 (true 31/98, false 301/449); frames removed by the +2 h extension beyond S1 (all 546 episodes): 9792
+
+(f) frame counts (recomputed from series; 2026-09-24 item 1c)
+  exposure-rule frames: 661
+  of which QUALITY != 0: 544
+  of which QUALITY == 0: 117
+  inside P2 flare interval, any QUALITY: 86
+  inside P2 flare interval, QUALITY == 0: 68
+  frames total: 65253
+  frames in P2 flare intervals (any QUALITY): 2180
+
+(g) pre-stated rule: PRIMARY delta > 0 and 95% CI excludes 0 and S1 delta > 0 -> False -> "no detectable improvement"

@@ -1,0 +1,15 @@
+# Core packages: data build, gate, cohort and models, AIA 94 A processing (CV_box), TEST 1/2, filter tests,
+# post-hoc checks and figures. Versions = the project environment (Python 3.12.13).
+numpy==2.5.3
+pandas==3.0.6
+scipy==1.18.1
+scikit-learn==1.9.1
+joblib==1.6.0
+matplotlib==3.11.2
+astropy==8.0.1
+sunpy==8.0.0
+aiapy==0.12.1
+drms==0.9.1
+reproject==0.21.0
+xarray==2026.7.0
+netCDF4==1.7.4  # not imported directly: xarray's reader for the GOES XRS .nc files (src/goes_xrs.py)

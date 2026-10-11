@@ -1,0 +1,50 @@
+{
+ "A": {
+  "cols": [
+   "score",
+   "n_C",
+   "n_M",
+   "n_X"
+  ],
+  "tau": 0.06797012467017155,
+  "dev_oof_weighted_true_kept": 0.8814539956415635,
+  "dev_oof_logloss": 0.3205958914513741
+ },
+ "A_CV": {
+  "cols": [
+   "score",
+   "n_C",
+   "n_M",
+   "n_X",
+   "log10_CV_box"
+  ],
+  "tau": 0.0746565023467498,
+  "dev_oof_weighted_true_kept": 0.8817141551244276,
+  "dev_oof_logloss": 0.31324226977989084
+ },
+ "C": {
+  "cols": [
+   "score",
+   "n_C",
+   "n_M",
+   "n_X",
+   "logR"
+  ],
+  "tau": 0.06256983158392139,
+  "dev_oof_weighted_true_kept": 0.8806735171929708,
+  "dev_oof_logloss": 0.322257851323973
+ },
+ "C_CV": {
+  "cols": [
+   "score",
+   "n_C",
+   "n_M",
+   "n_X",
+   "logR",
+   "log10_CV_box"
+  ],
+  "tau": 0.06893616544608924,
+  "dev_oof_weighted_true_kept": 0.8803266378824854,
+  "dev_oof_logloss": 0.3160449750917507
+ }
+}

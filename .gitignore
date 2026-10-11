@@ -1,0 +1,13 @@
+# downloaded and restored data (see README: data sources, reproduce without downloads)
+data/
+*.fits
+*.fits.gz
+*.nc
+# environments and caches
+.venv/
+venv/
+__pycache__/
+*.pyc
+.DS_Store
+# logs written by re-runs at the release root (the released logs are in logs/)
+/*.log

@@ -1,0 +1,18 @@
+2025-26 RE-TEST: CV_box AS A FILTER ON TOP OF MODEL C — pre-registered re-test on an already-analysed set, NOT an untouched test. RUN ONCE.
+hashes re-verified: 22 files + thresholds.json. Set: 378 evaluable <= 2-region episodes (true 56, false 322, HARPs 101); weights 1/n per HARP; delayed = false; frozen models, no refitting
+composition (year / regions at t: episodes): 2025/1: 101, 2025/2: 161, 2026/1: 62, 2026/2: 54
+
+per model at its frozen tau (weighted fractions; 'true alarm episodes kept'):
+model    tau true_kept  true_kept_w  false_kept false_removed  false_removed_w    AUC  logloss
+    A 0.0680     56/56       1.0000         322         0/322           0.0000 0.7631   0.3933
+ A_CV 0.0747     41/56       0.7863         107       215/322           0.6312 0.7993   0.3662
+    C 0.0626     54/56       0.9262         235        87/322           0.3102 0.7693   0.3774
+ C_CV 0.0689     41/56       0.7863         127       195/322           0.5507 0.7977   0.3672
+
+PRIMARY = C vs C_CV; SECONDARY = A vs A_CV. D_false = weighted % false alarms removed (CV model minus base); D_true = weighted % true alarm episodes kept (CV model minus base); percentage points; paired HARP bootstrap 2,000, seed 0. Delta log-loss = base - CV model; HARP bootstrap 10,000, seed 20260921.
+comparison  D_false_pts  D_false_lo  D_false_hi  D_true_pts  D_true_lo  D_true_hi  resamples_used  dlogloss  dlogloss_lo  dlogloss_hi  AUC_base  AUC_cv
+ C vs C_CV      24.0478     14.6289     33.4476    -13.9837   -28.4688    -4.4163            2000    0.0102      -0.0170       0.0371    0.7693  0.7977
+ A vs A_CV      63.1212     54.3821     71.8300    -21.3653   -40.3270    -7.3188            2000    0.0272      -0.0010       0.0568    0.7631  0.7993
+
+PRE-STATED READING (mechanical; PRIMARY C vs C_CV): D_false +24.05 pts [+14.63, +33.45], D_true -13.98 pts [-28.47, -4.42], resamples_used 2000 -> "REMOVES FALSE ALARMS BUT LOSES TOO MANY TRUE ALARMS (point estimate)"
+wall 2.1 s, workers 9

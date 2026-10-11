@@ -1,0 +1,24 @@
+{
+ "cols": [
+  "score",
+  "n_C",
+  "n_M",
+  "n_X",
+  "logR",
+  "log10_CV_box",
+  "prot12"
+ ],
+ "estimator": {
+  "penalty": "l2",
+  "C": 0.3,
+  "solver": "lbfgs",
+  "max_iter": 10000
+ },
+ "tau": 0.07921511827656076,
+ "dev_oof_logloss": 0.3139367706143045,
+ "dev_oof_AUC": 0.7930147541185801,
+ "dev_oof_true_kept_w": 0.8839994776405677,
+ "dev_oof_false_removed_w": 0.5734979171976793,
+ "true_kept_n": "84/96",
+ "false_removed_n": "255/445"
+}

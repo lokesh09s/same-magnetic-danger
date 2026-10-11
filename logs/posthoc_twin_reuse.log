@@ -1,0 +1,18 @@
+Step 1: TEST 1 reproduced exactly with the existing code: ratio 3.2624 [1.2956, 9.4887], 50 pairs (pairs resampled by true HARP; 2,000, seed 0)
+
+POST-HOC (7c9b7bb): 50 TEST 1 pairs; median true CV_box / median false CV_box; 2,000 resamples, seed 0; percentile 95% CI
+                                    interval                 clusters  ratio            95% CI share ratio <= 1  resamples used  skipped (zero weight)  undefined (non-finite)
+Step 1 flaring side only (true HARP; TEST 1)            18 true HARPs 3.2624  [1.2956, 9.4887]           0.0060            2000                      0                       0
+      (a) non-flaring side only (false HARP)           41 false HARPs 3.2624  [1.4764, 8.9395]           0.0025            2000                      0                       0
+ (b) both sides (two-way, weights a_i * b_j) 18 true x 41 false HARPs 3.2624 [0.8632, 12.2290]           0.0380            2000                      0                       0
+    (c) linked groups (connected components)             4 components 3.2624 [0.6812, 18.8683]           0.0405            2000                      0                       0
+
+distinct HARPs: true 18, false 41, on both sides 8 [12713, 12793, 13708, 13726, 13883, 14187, 14915, 14924], total 51
+components: 4; sizes (HARPs / pairs), ordered by smallest HARP:
+ component  HARPs  pairs                                                                                                                                                                                                                                                                       members
+         1     45     47 12597 12713 12732 12752 12768 12793 12889 13091 13145 13171 13207 13232 13299 13323 13424 13445 13492 13501 13574 13708 13726 13768 13855 13880 13883 13891 14003 14081 14117 14187 14191 14284 14285 14491 14535 14594 14615 14624 14765 14825 14831 14898 14915 14924 14953
+         2      2      1                                                                                                                                                                                                                                                                   12853 12896
+         3      2      1                                                                                                                                                                                                                                                                   13030 13190
+         4      2      1                                                                                                                                                                                                                                                                   13269 13946
+
+wall 2.0 s, workers 9

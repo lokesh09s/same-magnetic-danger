@@ -1,0 +1,12 @@
+{
+ "_note": "TEST 2 (Step B) frozen development thresholds, copied verbatim from euv_confirm_tests.log line 17 on 2026-10-11 (by Claude (AI), at the user's request) so the paper's file reference is correct. Not a new analysis; the log is the original record.",
+ "A": {
+  "tau": 0.094958,
+  "rule": "maximises development weighted TSS (0.4516); weighted TPR 0.6482"
+ },
+ "C": {
+  "tau": 0.10084,
+  "rule": "highest development threshold with weighted TPR >= A's (0.6482); TPR 0.6688"
+ },
+ "source": "euv_confirm_tests.log:17"
+}

@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this code or these results, please cite them as below."
+title: "Same Magnetic Danger, Different Outcome"
+type: software
+authors:
+  - given-names: Lokesh
+    family-names: Chaudhary
+  - given-names: Kyros
+    family-names: Goyal
+license: MIT
+abstract: >-
+  Code, frozen models, pre-registrations and result logs for a study of solar-flare false alarms:
+  among alarms with matched magnetic-model scores, is AIA 94 Å variability (CV_box) in the 24 hours
+  before the alarm higher for true alarms than for false alarms?
+keywords:
+  - solar flares
+  - flare forecasting
+  - SDO/AIA
+  - SHARP
+  - pre-registration

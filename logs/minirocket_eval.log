@@ -1,0 +1,44 @@
+CANDIDATE #27 MRKT — STEP 2, DEV EVALUATION, RUN ONCE (EXPLORATORY (dev)); decisions.md 16569b6 + b1fbd2e
+checks: C_CV OOF reproduces the frozen euv_extra C_CV exactly (LL 0.3160449751, tau 0.0689361654); episodes 541 (true 96, false 445), HARPs 179
+check: curves identical to the Step 1 file data/minirocket/curves.csv
+pipeline wall 58.8 s
+
+== E1 PRIMARY (MiniRocket random_state 20260921): Δ = LL(C_CV) − LL(C_CV + curve) (+ = curve helps); HARP bootstrap 10000, seed 20260921
+  LL(C_CV) 0.3160, LL(C_CV + curve) 0.3263; Δ -0.0103 [-0.0219, -0.0018]; weighted AUC 0.7888 -> 0.7528
+  chosen C (5 outer + 25 inner curve models): {0.0001: 21, 0.001: 9}; MiniRocket features 9996
+  stacker coefficients per outer fold (per 1 SD, training-fold StandardScaler):
+ fold   score     n_C     n_M     n_X    logR  log10_CV_box  logit_curve
+    0 +0.7625 +0.0529 +0.0082 +0.0532 +0.1408       +0.8346      -0.2823
+    1 +0.5077 -0.0133 +0.3536 +0.0280 -0.1508       +0.5058      -0.1791
+    2 +0.8800 +0.1276 +0.1209 -0.1098 +0.1792       +0.7579      +0.0084
+    3 +0.7620 -0.3384 +0.2376 -0.0757 +0.0206       +0.2849      +0.5487
+    4 +0.6328 +0.0423 +0.2041 +0.0376 +0.0086       +0.8785      -0.3052
+
+== E2 MATCHED RETENTION: dev OOF tau per model (tau_keep); weighted; paired HARP bootstrap 2000, seed 0
+  target 0.88: C_CV tau 0.068936 true kept 84/96 (0.8803 w), false removed 218/445 (0.4863 w) | C_CV + curve tau 0.056796 true kept 85/96 (0.9228 w), false removed 189/445 (0.4039 w)
+     false removed (C_CV + curve − C_CV): -8.24 points [-13.37, -3.71]
+  target 0.95: C_CV tau 0.060364 true kept 88/96 (0.9544 w), false removed 193/445 (0.4191 w) | C_CV + curve tau 0.046364 true kept 90/96 (0.9669 w), false removed 132/445 (0.2400 w)
+     false removed (C_CV + curve − C_CV): -17.91 points [-23.43, -12.56]
+
+== E3 DESCRIPTIVE
+  curve-score-only OOF weighted AUC 0.7054; CV_box-only OOF weighted AUC (fit_folds on log10_CV_box) 0.7068
+  curve-score twins (T_a = twins(c), T_b = twins(c, by_group=True); ratio_jobs mode 'ratio' on the OOF curve score; CI pairs by true HARP 2000, seed 0)
+twins  pairs  twin_med_true  twin_med_false  ratio_twins            tw_CI  true_higher  false_higher  ties  sign_p  ratio_all           all_CI
+  T_a     81         0.2033          0.1046       1.9428 [1.1077, 2.7734]           54            27     0  0.0036     2.3581 [1.5861, 3.2283]
+  T_b     78         0.2067          0.1174       1.7602 [0.7797, 2.3131]           50            28     0  0.0169     2.3581 [1.5861, 3.2283]
+  Spearman rho(curve score, log10_CV_box) = 0.8155 (p 4.08e-130, n 541)
+  Spearman rho(curve score, n_C) = 0.6763 (p 1.38e-73, n 541)
+  Spearman rho(curve score, logR) = -0.6405 (p 8.20e-64, n 541)
+  Spearman rho(curve score, score) = 0.4288 (p 1.32e-25, n 541)
+
+== E4 STABILITY: E1 with MiniRocket random_state in [1, 2, 3, 4, 5] (primary stays 20260921)
+  random_state 20260921: LL(C_CV + curve) 0.3263; Δ -0.0103 [-0.0219, -0.0018]; AUC 0.7528
+  random_state 1: LL(C_CV + curve) 0.3266; Δ -0.0105 [-0.0222, -0.0020]; AUC 0.7525
+  random_state 2: LL(C_CV + curve) 0.3266; Δ -0.0105 [-0.0225, -0.0018]; AUC 0.7493
+  random_state 3: LL(C_CV + curve) 0.3257; Δ -0.0096 [-0.0203, -0.0018]; AUC 0.7534
+  random_state 4: LL(C_CV + curve) 0.3253; Δ -0.0093 [-0.0196, -0.0017]; AUC 0.7583
+  random_state 5: LL(C_CV + curve) 0.3264; Δ -0.0103 [-0.0220, -0.0018]; AUC 0.7512
+
+QUALIFICATION RULE (pre-stated, mechanical): E1 Δ -0.0103 > 0 is False; E2 (88%) -8.24 points > 0 is False -> "NOT ELIGIBLE"
+
+wall total 62.1 s

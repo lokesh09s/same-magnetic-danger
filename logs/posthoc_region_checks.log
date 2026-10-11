@@ -1,0 +1,7 @@
+POST-HOC region-level checks of TEST 1 (not pre-registered)
+pairs 50; twins ratio (median true / median false) 3.2624; true more restless in 39 of 50 pairs
+region-level sign: 18 true-alarm HARPs; true more restless in most pairs 14, evenly split 2, opposite 2
+  two-sided sign test, ties counted against: 14/18 p = 0.0309; ties excluded: 14/16 p = 0.0042
+  per HARP (true-higher / pairs): 14117 5/7, 14491 7/7, 13299 4/5, 13574 3/4, 12793 4/4, 14915 2/3, 13726 2/3, 13883 2/2, 13880 2/2, 13708 1/2, 12713 2/2, 12597 1/2, 14924 0/2, 14187 1/1, 12896 0/1, 13269 1/1, 13030 1/1, 14615 1/1
+leave-one-true-HARP-out twins ratio: 2.47 (without 14491) to 3.90 (without 14924)
+paired estimate (median of within-pair CV_box ratios): 2.86 [1.67, 5.32] (2,000 resamples of true-alarm HARPs, seed 20261011; one-way, like the registered interval)
