@@ -14,7 +14,7 @@ the per-entry tags appear throughout. The paper's own AI-use statement is the au
   - the file selection;
   - the minimal path edits listed in `CHANGES.md`;
   - `scripts/00_reproduce_from_results.py`;
-  - `README.md`, `MANIFEST.md`, `CHANGES.md`, this file and `preregistration/PREREG_INDEX.md`.
+  - `README.md`, `MANIFEST.md`, `CHANGES.md`, this file, `COMMIT_HISTORY.md` and `preregistration/PREREG_INDEX.md`.
 
 ## Claude (Anthropic, chat)
 

@@ -11,6 +11,7 @@ Original paths and every edit are in `CHANGES.md`.
 - `AI_USE.md` — AI-use disclosure
 - `CHANGES.md` — every edit made for the release (file, line, before → after, why), renames, new files
 - `MANIFEST.md` — this file
+- `COMMIT_HISTORY.md` — all 283 commits of the project repository: full hash, time and message (the hashes cited in decisions.md)
 - `requirements.txt` — pinned core packages (Python 3.12)
 - `requirements-extra.txt` — torch, sktime, threadpoolctl: only for scripts/09_cnn1d.py and src/minirocket.py
 - `.gitignore` — keeps data/, environments, caches and re-run logs out of git

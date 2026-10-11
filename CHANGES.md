@@ -4,7 +4,7 @@ Every file was first copied byte for byte from the project repository (1,485 fil
 Then only the changes below were made. No analysis logic was changed.
 
 13 of the copied tables were then removed again, because the scripts that wrote them are not in the release and no paper
-number depends on them (listed under "Excluded" in `MANIFEST.md`). With the 11 new files, the release holds 1,483 files.
+number depends on them (listed under "Excluded" in `MANIFEST.md`). With the 12 new files, the release holds 1,484 files.
 
 ## Edits
 
@@ -94,5 +94,6 @@ The four `scripts/prospective_look1*.py` files themselves are byte-identical to 
 ## New files (written for the release by Claude Code (AI), 2026-10-11)
 
 - `scripts/00_reproduce_from_results.py`: the no-download check (TEST 1 and the post-hoc region checks). It only calls registered code.
+- `COMMIT_HISTORY.md`: generated from the project repository's `git log` (283 commits; 5 private session-link lines removed).
 - `README.md`, `MANIFEST.md`, `CHANGES.md`, `AI_USE.md`, `CITATION.cff`, `LICENSE`, `requirements.txt`, `requirements-extra.txt`, `.gitignore`,
   `preregistration/PREREG_INDEX.md`.

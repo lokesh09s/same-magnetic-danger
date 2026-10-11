@@ -8,7 +8,8 @@ read.
 - **Line** is the entry's heading line in `decisions.md` (this copy keeps the original line numbers).
 
 The hashes come from the project repository's git history (`git log` of `decisions.md`). Many are also cited inside
-`decisions.md`. The git history itself is not part of this release.
+`decisions.md`. The git history itself is not part of this release; `COMMIT_HISTORY.md` (top level) lists every commit with its full
+hash, time and message.
 
 ## Gate, labels, split and frozen models (development data only)
 

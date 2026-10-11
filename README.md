@@ -35,7 +35,7 @@ LITERATURE, or "NOT ELIGIBLE" with its decisions.md line).
 ## Layout
 
 ```
-README.md  LICENSE  CITATION.cff  AI_USE.md  CHANGES.md  MANIFEST.md  requirements.txt  requirements-extra.txt
+README.md  LICENSE  CITATION.cff  AI_USE.md  CHANGES.md  MANIFEST.md  COMMIT_HISTORY.md  requirements*.txt
 src/              28 modules that other code imports (original file names)
 scripts/          the runnable steps, numbered in pipeline order, plus the prospective Look 1 code (prospective_look1*.py)
 frozen/           frozen_spec.json, split.csv, and the frozen model and threshold files (byte-identical)
@@ -161,8 +161,9 @@ original repository paths:
 - **The exploratory candidates** (step 09) were evaluated on development years only.
 - **The model files are Python pickles (joblib).** Load only copies whose SHA-256 matches `frozen/frozen_spec.json`
   or `frozen/*/model_hashes.json`.
-- **The git history** of the project repository (the commit hashes cited in `decisions.md` and `PREREG_INDEX.md`) is
-  not part of this release.
+- **The git history** of the project repository is not part of this release. It holds raw data and journal PDFs.
+  `COMMIT_HISTORY.md` lists all its commits (full hash, time and message), including the hashes cited in
+  `decisions.md` and `PREREG_INDEX.md`.
 
 ## How to publish
 
