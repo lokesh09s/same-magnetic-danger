@@ -38,8 +38,7 @@ the per-entry tags appear throughout. The paper's own AI-use statement is the au
 - Generated and ran one exploratory verification run (`verification/` in the project repository). It was not part
   of the final analysis and is not included here.
 - Did editing work, including recording the 2026-10-09 clarification entry in `decisions.md` at the user's request.
-- Produced a private reference manuscript draft. It is not for submission and is not included here; it was fact-checked
-  against the repository (`decisions.md`, 2026-10-05).
+
 
 ## Decisions
 
