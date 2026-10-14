@@ -1,7 +1,7 @@
 # Same Magnetic Danger, Different Outcome
 
 Code, frozen files, pre-registrations and result logs for a study of false alarms in solar-flare forecasting.
-Authors: Lokesh Chaudhary and Kyros Goyal. AI assistance is disclosed in [AI_USE.md](AI_USE.md).
+Authors: Lokesh Chaudhary and Kyros Goyal.
 
 ## The question
 
